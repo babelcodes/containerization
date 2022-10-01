@@ -137,6 +137,68 @@ curl localhost:5000/v2/_catalog
 docker container rm -f registry
 ```
 
+## Storage / Volumes
+
+- https://gitlab.com/lucj/docker-exercices/-/blob/master/08.Storage/volumes.md
+- La layer en lecture / écriture est la dernière, superposée sur les autres layers en lecture seule
+- Les changements sont persistés dans cette layer
+- Créée et supprimée avec le container
+- Donc perdue
+- Pour persistées des données, découplées du cycle de vie de vie du container, elles doivent être gérées en dehors
+
+```shell
+$ docker container run -ti --name test alpine sh
+/ touch hello.txt
+/ exit
+$ find /var/lib/docker -type f -name 'hello.txt' # Exist!... in a layer of the container
+/var/lib/docker/overlay2/<CONTAINER_ID>/diff/hello.txt
+$ docker container rm test
+$ find /var/lib/docker -type f -name 'hello.txt' # Not Exist Anymore!
+```
+
+### Volume
+
+- Permet de créer un montage, répertoires / fichier existant en dehors de l'Union Filesystem
+- Découpler données du cycle de vie du container$
+- Création:
+  - Instruction: `VOLUME VOLUME_1 VOLUME_2` (in Dockerfile)
+  - Options: `-v / --mount` (à la création du container)
+  - Command: `docker volume create`
+- Utilise le driver par défaut (sur la machine hôte)
+- Use cases: databases, logs storage
+
+Commands:
+```shell
+$ docker container inspect -f '{{json .Mounts}}' mongo | python -m json.tool
+
+$ docker container run -v CONTAINER_PATH IMAGE
+
+$ docker volume --help # create | inspect | ls | prune | rm
+```
+
+Exemple:
+```shell
+$ docker volume create --name db-data 
+$ docker volume ls
+$ docker volume inspect db-data
+$ docker container run -d --name db -v db-data:/data/db mongo:4.0
+$ ls /var/lib/docker/volumes/db-data/_data
+```
+
+### Drivers
+
+- https://gitlab.com/lucj/docker-exercices/-/blob/master/08.Storage/sshfs.md
+
+````shell
+$ docker plugin install vieux/sshfs
+$ ssh USWE@HOST mkdir /tmp/data
+$ docker volume create -d viwux/sshfs -o sshcmd=USWE@HOST:/tmp/data -o password=PWD data
+$ docker volume ls
+$ docker run -it -v data:/data alpine
+$ touche /data/test
+$ ss USWE@HOST ls /tmp/data
+````
+
 
 ## Images
 
