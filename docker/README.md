@@ -36,6 +36,55 @@
 - Control Groups: to limit resources
 - A container can be viewed as a process, isolate from the others
 
+## Images
+- Template de container
+- System de fichiers avec dépendances
+- Composés de couches / layers! Partagées entre images
+- Élément portable à condition que le runtime soit présent
+- Distribuée via registry , ex: DockerHub (hub.docker.com)
+- Constituée de:
+	- Code
+	- Librairies
+	- Environnement d’exécution
+- `Dockerfile` commands:
+   - https://www.udemy.com/course/la-plateforme-docker/learn/lecture/13216276#overview
+- Commands `docker image <command>`:
+	- `pull`, user/image:version
+	- `push` (login)
+	- `inspect`
+	- `history`, les layers utilisées pour créer une image
+	- `ls`
+		- `--filter dangling=true` (les images qui ne sont plus référencées (sans nom ni version) et qui peuvent être supprimées
+		- `-q` = la liste des ID
+		- `prune` pour supprimer tous les dangling
+	- `save` / `load`
+	- `rm`
+		- `docker image rm ${docker image ls -q}`
+
+`vi Dockerfile`
+
+```
+FROM node:10.13.0-alpine
+COPY . /app/
+RUN cd /app && npm i
+EXPOSE 8080
+WORKDIR /app
+CMD ["npm", "start]
+```
+
+`docker image build -t app:0.1 .`
+
+`docker container run -p 8080:8080 app:0.1`
+
+- Multi-stages build
+	- since:17.5
+	- https://gitlab.com/lucj/docker-exercices/-/blob/master/06.Images/multi-stage-build-GO.md 
+- Cache
+   - Mettre le plus bas dans le `Dockerfile` les éléments qui sont modifiés le plus souvent
+   - https://gitlab.com/lucj/docker-exercices/-/blob/master/06.Images/cache.md 
+- Build Context
+	- `.dockerignore` (.git, node_module...)
+
 
 ## Images
 
