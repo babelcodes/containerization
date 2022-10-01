@@ -85,6 +85,58 @@ CMD ["npm", "start]
 - Build Context
 	- `.dockerignore` (.git, node_module...)
 
+## Registry
+
+- Pour deployer
+- Build *Ship* Run
+- push / pull
+
+Providers
+- hub.docker.com
+	- Docker Registry
+	- Docker Trusted Registry
+- Amazon EC2 container registry
+- Google Container Registry
+- GitLab container registry
+
+Docker Hub
+- Intégration avec Github et BitBucket
+- Mais aussi des plugins
+- Images officielles et celles certifiées
+- ou encore les publiques (attention)
+- Repository public ou privé
+	- Tag: user/iamge:version
+- Intégration: pousser dans une branche puis un webhook deploy sur docker hub
+
+```
+subl Dockerfile
+docker image ls
+docker image build -t jacquescouvreur/www:1.0 .
+## OR TAG EXISTING IMAGE: docker image tag IMAGE USERNAME/www:1.0
+docker image ls
+docker login
+docker image push jacquescouvreur/www:1.0
+docker image rm jacquescouvreur/www:1.0
+docker image ls
+docker image pull jacquescouvreur/www:1.0
+```
+
+Docker Open Source Registry
+- https://docs.docker.com/registry/configuration/
+- 	https://www.udemy.com/course/la-plateforme-docker/learn/lecture/13216234#overview
+- peut deployer en local, sinon securiser
+- https://gitlab.com/lucj/docker-exercices/-/blob/master/07.Registry/setup-open-source-registry.md
+- https://gitlab.com/lucj/docker-exercices/-/blob/master/07.Registry/configure-open-source-registry.md
+```
+docker container run --name registry -d -p 5000:5000 registry:2.6.2
+curl localhost:5000/v2/_catalog
+docker image pull nginx:1.14-alpine
+docker image tag nginx:1.14-alpine localhost:5000/nginx:1.14
+docker image push localhost:5000/nginx:1.14
+curl localhost:5000/v2/_catalog
+docker container rm -f registry
+```
+
 
 ## Images
 
