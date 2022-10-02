@@ -65,6 +65,7 @@ $ docker swarm join
 - Heartbeats are sent on regular basis
   - Including lifecycle beat
   - And change message
+- [RAFT go deeper](https://gitlab.com/lucj/docker-exercices/-/blob/master/11.Swarm/raft-logs.md)
 
 ## Node
 
@@ -74,6 +75,7 @@ $ docker swarm join
     - Schedule and orchestrate containers, if Leader
     - Manage the cluster state
     - RAFT
+    - Save the Swarn state in `/var/lib/docker/swarm`
   - `Worker`
     - Execute containers
   - by default, a manager is also a worker
@@ -332,7 +334,7 @@ $ docker service rm
 - By default update a replica and go to the next
 ```shell
 $ docker service create    \
-    --update-parallelism 2 \      # Replicats updated 2 by 2
+    --update-parallelism 2 \      # Replicas updated 2 by 2
     --update-delay 10s     \      # Wait 10s before update next replicas pool
     --replicas 4           \
     --publish 27017:27017  \
@@ -384,3 +386,163 @@ cat: /run/secrets/password: No such file or directory
 
 - As a secret but not sensible
 - https://gitlab.com/lucj/docker-exercices/-/blob/master/11.Swarm/config-et-secret.md 
+
+
+## Stack
+
+- A group of services
+- As a complete application, compound with services
+- Created / deployed with a [Docker Compose](./compose.md) file
+```shell
+$ docker stack --help
+
+Commands:
+  deploy      Deploy a new stack or update an existing stack
+  ls          List stacks
+  ps          List the tasks in the stack
+  rm          Remove one or more stacks
+  services    List the services in the stack
+```
+
+### Creation
+```shell
+$ git clone https://github.com/dockersamples/example-voting-app && cd example-voting-app
+$ docker stack deploy -c docker-stack.yml vote
+$ docker stack ls
+NAME     SERVICES             ORCHESTRATOR
+vote     6                    Swarm
+$ docker stack ps
+ID          NAME          IMAGE          NODE          DESIRED STATE          CURRENT STATE          ERROR
+$ docker service ls
+$ docker stack rm
+```
+- https://www.udemy.com/course/la-plateforme-docker/learn/lecture/13216024#overview
+- https://github.com/dockersamples/example-voting-app/blob/master/docker-stack.yml
+
+### Remove
+```shell
+$ docker stack rm vote
+```
+
+## TICK
+
+- https://www.influxdata.com/time-series-platform/
+- https://gitlab.com/lucj/docker-exercices/-/blob/master/11.Swarm/stack-TICK.md
+
+> La stack TICK est principalement dédiée à la gestion des séries temporelles. 
+> Elle constitue un choix intéressant en tant que backend de réception et de stockage de données
+> provenant de capteurs IoT (par exemple: température, pression atmosphérique, niveau d'eau, ...).
+> 
+> Le nom de cette stack provient des éléments dont elle est composée:
+> - Telegraf
+> - InfluxDB
+> - Chronograf
+> - Kapacitor
+
+![](https://gitlab.com/lucj/docker-exercices/-/raw/master/11.Swarm/images/tick-1.png)
+
+
+## Routing Mesh
+- Expose services from external, on all the nodes of the stack
+
+
+## Backup & Restore
+- https://gitlab.com/lucj/docker-exercices/-/blob/master/11.Swarm/restore.md
+
+
+## Fault tolerance
+- https://gitlab.com/lucj/docker-exercices/-/blob/master/11.Swarm/articles/tolerance-pannes.md
+
+
+## Monitoring
+
+### Command line
+```shell
+$ docker stack ps
+ID          NAME          IMAGE          NODE          DESIRED STATE          CURRENT STATE          ERROR
+```
+
+### Visualizer
+- See the `VISUALIZER` service [available in voting app](https://github.com/dockersamples/example-voting-app/blob/master/docker-stack.yml#L77):
+- https://hub.docker.com/r/dockersamples/visualizer
+- https://github.com/dockersamples/docker-swarm-visualizer
+
+### Swarmprom: 
+- https://github.com/stefanprodan/swarmprom
+- `dockerd-exporter`: expose metrique du docker deamon
+- `cadvisor`: expose metrics des conatianers du swarm
+- [prometheus](https://github.com/stefanprodan/swarmprom/blob/master/docker-compose.yml#L149): collecte et sauve ces metrics
+- `grafana`: affiche dans dashboards
+- `alertmanager`: lance alertes sur ces metrics
+- `unsee`: dashboard pour alertmanager
+- `caddy`: expose points d'entrees de l'app
+
+### Portainer.io
+> Easily deploy, configure and secure containers in minutes on Docker, Kubernetes, Swarm and Nomad in any cloud, datacenter or device.
+- https://www.portainer.io/
+```shell
+curl -L https://downloads.portainer.io/ee2-15/portainer-agent-stack.yml -o portainer-agent-stack.yml
+```
+
+### Swarmpit.io
+> Operate your docker infrastructure like a champ
+- https://swarmpit.io/
+```shell
+git clone https://github.com/swarmpit/swarmpit -b master
+docker stack deploy -c swarmpit/docker-compose.yml swarmpit
+```
+Or with installer:
+- https://github.com/swarmpit/installer
+```shell
+docker run -it --rm \
+  --name swarmpit-installer \
+  --volume /var/run/docker.sock:/var/run/docker.sock \
+  swarmpit/install:1.9
+```
+
+
+## Quiz
+
+Which command to create a Swarm?
+- `docker swarm init`
+
+Which command to update replicas of a deployed service?
+- `docker service update --replicas 8 myservice`
+- `docker service scale myservice=8`
+
+Which command to get token to add a node as manager?
+- `docker swarm join-token manager`
+
+What do this command `docker node update --availability drain node3`?
+- Containers on this node will bw stopped and re-scheduled on other nodes
+
+Does the availability of a node can be `paused`?
+- No, it can be `pause`
+
+Count of managers is recommended for a Swarm in production?
+- 3
+- Un Swarm comportant 3 managers tolère la panne d'un manager car le quorum de 2 sera présent pour les décisions de vote. Utiliser 4 managers ne changerait rien car le quorum de 3 tolèrerait également la panne d'un seul manager.
+
+Dans le cadre d'un Swarm composé de 7 managers et réparti sur 3 datacenters, quelle est la répartition recommandée pour les managers ?
+- 3-2-2
+
+Get services status of a stack deployed with `docker stack deploy -c docker-stack.yml app`?
+- [ ] `docker stack ls`
+- [ ] `docker stack ls app`
+- [x] `docker stack ps app`
+- [ ] `docker services ls`
+
+Command to get access to the secret `TOKEN` for the service `api`?
+- `docker service update --secret-add TOKEN api`
+
+`docker service update --update-delay 10s --update-parallelism 2 api`?
+- Lors d'une mise à jour du service api, les replicas seront mis à jour 2 par 2, toutes les 10 secondes
+
+Option to launch a service with a replica on each node?
+- `--mode global`
+
+Launch a service, with the image `nginx`, publish on port `80` from `8080` of each node, with 3 replicas?
+- `docker service create --replicas=3 --publish 8080:80 nginx` (`-p` can replace `--publish`)
+
+Where is the swarm state stored in a manager node?
+- `/var/lib/docker/swarm`
