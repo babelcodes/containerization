@@ -207,100 +207,19 @@ $ ss USWE@HOST ls /tmp/data
 
 - [Docker Machine](./machine.md)
 
-## Docker Compose
+## Compose
 
-- Gérer des applications complexes, ex: microservices
-- Format de fichier `docker-compose.yml` et un binaire
+> Gérer des applications complexes, ex: microservices
 
-### docker-compose.yml
-- https://docs.docker.com/compose/compose-file/
-- Options:
-  - Services
-  - Volumes
-  - Networks
-  - Sercrets
-  - Configs
-- Instructions (pouvant être définies pour chaque service):
-  - Images utilisées (obligatoire)
-  - Nombre de replicas
-  - Ports publiés (à l'exterieur)
-  - Health check
-  - Stratégie de redémarrage
-  - Contraintes de déploiement (Swmarm)
-  - Configuration de mises à jour (Swmarm)
-  - Secrets utilisés (Swmarm)
-  - Config utilisés (Swmarm)
-- Motivation (différences à gérer entre DEV et PROD):
-  - `bind-mount` du code applicatif (pas en PROD)
-  - binding des ports
-  - variables d'environnement
-  - règles de redémarrage
-  - services supplémentaires (tls, logs, monitoring...)
-  - contraintes de placement
-  - contraintes d'utilisation des ressources (RAM, CPU)
+- [Docker Compose](./compose.md)
 
-Un exemple avec app web, API et DB:
-```yaml
-version: '3.7' # FONCTION DU DEAMON UTILISE
-volumes: 
-	data:
-networks:
-	frontend:
-	backend:
-services:
-	web:
-		image: org/web:2.3
-		networks:
-			- frontend
-		ports:
-			- 80:80
-	api:
-		image: org/api:2.3
-		networks:
-			- backend
-			- frontend
-	db:
-		image: mongo:4.0
-		volumes:
-			- data:/data/db
-		networks:
-			- backend
-```
+## Swarm
 
-### Le binaire
+> The clustering and orchestration solution from Docker
+> - to manage a hosts cluster
+> - orchestrate the services of this cluster
 
-- Indépendant du deamon
-- Installation indépendante (mais incluse dans Docker Desktop)
-  - https://docs.docker.com/compose/install/ 
-- Commandes
-  - `up` / `down`: creation / suppression d'une application
-  - `start` / `stop`: démarrage/arrêt d'une application
-  - `build`
-  - `pull`
-  - `logs`
-  - `scale` `SERVICE=N`
-  - `ps`
-  - `--help`
-
-### Service Discovery / DNS
-
-Configuration:
-```yaml
-version: '3.7'
-services:
-	MYDB:
-		image: mongo:4.0
-```
-Code (NodeJS):
-```javascript
-const url = 'mongodb://MYDB/todos';
-```
-
-### VotingApp
-
-- https://github.com/dockersamples/example-voting-app
-- Exemple utilisé pour démos / présentations
-- 5 services, différents langages et BD
+- [Swarm](./swarm.md)
 
 ## Images
 
@@ -320,10 +239,6 @@ Run an image:
 docker container run -p 27017:27017 mongo:4.0
 docker container run -p 80:3000 redmine:3
 ```
-
-## Swarm
-
-- [Swarm](./swarm.md)
 
 ## Ecosystem
 
