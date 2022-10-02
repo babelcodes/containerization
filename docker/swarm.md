@@ -198,26 +198,26 @@ pes...      node2        Ready      Active           Reachable
 - https://gitlab.com/lucj/docker-exercices/-/blob/master/11.Swarm/swarm-creation-DigitalOcean.md
 
 Create virtual machines (future nodes):
-````shell
+```shell
 $ docker-machine create --driver virtualbox node1
 $ docker-machine create --driver virtualbox node2
 $ docker-machine create --driver virtualbox node3
 
 # $ docker-machine regenerate-certs node3 
 # $ docker-machine restart node3
-````
+```
 
 Initialize the Swarm (connected onto the node1):
-````shell
+```shell
 $ docker-machine ssh node1
 @node1$ docker swarm init
 @node1$ docker node ls
 ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS      ENGINE VERSION
 hxe06csr1ffvedr6hqcsyypau *   node1               Ready               Active              Leader              19.03.12
-````
+```
 
 Attach other nodes as workers (connected onto them):
-````shell
+```shell
 $ docker-machine ssh node2
 @node2$ docker swarm join --token SWMTKN-1-56t0awp55yflnr7oka9l7d7z7swhbervijmzze55b3wn4n2chy-93ddiva70ww50fmsoavrw1yom 192.168.99.104:2377
 
@@ -226,19 +226,19 @@ $ docker-machine ssh node3
 @node1$ docker node ls
 ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS      ENGINE VERSION
 hxe06csr1ffvedr6hqcsyypau *   node1               Ready               Active              Leader              19.03.12
-````
+```
 
 Check system (from manager node1):
-````shell
+```shell
 @node1$ docker node ls
 ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS      ENGINE VERSION
 d0ygaohomid6b9mttlr8i4b6r *   node1               Ready               Active              Leader              19.03.12
 0myxlr2lbmnr4fl8d9curhjhh     node2               Ready               Active                                  19.03.12
 xym9kgs3yp9bnnd3zf3sc3hxs     node3               Ready               Active                                  19.03.12
-````
+```
 
 Promote workers (from manager node1):
-````shell
+```shell
 @node3$ docker node promote node2
 Error response from daemon: This node is not a swarm manager. Worker nodes can't be used to view or modify cluster state. 
 Please run this command on a manager node or promote the current node to a manager.
@@ -254,7 +254,7 @@ xym9kgs3yp9bnnd3zf3sc3hxs     node3               Ready               Active    
 
 @node2$ docker node demote node2                                                                                                               
 Manager node2 demoted in the swarm.
-````
+```
 
 ## Service
 
@@ -303,7 +303,7 @@ Commands:
 
 ### Create
 Create a service:
-````shell
+```shell
 $ docker service create --name www -p 8080:80 --replicas 3 nginx  # SHOULD BE LANCHED ON A MANAGER
 $ docker service ls
 $ docker service ps www # Exectued tasks
@@ -312,10 +312,10 @@ $ docker service ps wwww
 $ curl get 192.168.99.100
 $ curl get 192.168.99.101
 $ curl get 192.168.99.102
-````
+```
 
 Example of a database:
-````shell
+```shell
 $ docker service create                       \
     --mount type=volume,src=data,dst=/data/db \
     --name db                                 \
@@ -324,13 +324,13 @@ $ docker service create                       \
 $ docker service ls
 $ docker volume ls
 $ docker service rm
-````
+```
 
 - https://gitlab.com/lucj/docker-exercices/-/blob/master/11.Swarm/service-creation.md
 
 ### Rolling upgrade
 - By default update a replica and go to the next
-````shell
+```shell
 $ docker service create    \
     --update-parallelism 2 \      # Replicats updated 2 by 2
     --update-delay 10s     \      # Wait 10s before update next replicas pool
@@ -340,10 +340,10 @@ $ docker service create    \
     instavote/vote
 
 $ docker service update --image instavote/vote:indent vote
-````
+```
 
 ### Service rollback
-````shell
+```shell
 $ docker service create    \
     --publish 27017:27017  \
     --name vote            \
@@ -354,6 +354,33 @@ $ docker service update --image instavote/vote:indent vote
 $ docker service inspect vote     # .Spec and .PreviousSpec
 
 $ docker service rollback vote
-````
+```
 
 - https://gitlab.com/lucj/docker-exercices/-/blob/master/11.Swarm/service-update-rollback.md
+
+
+## Secret
+
+- From v1.13
+- Sensible data
+- Commandline
+- Stored in encrypted logs (Raft)
+- And copied to the service, in (`cat`) `/run/secrets/SECRET_NAME`
+
+```shell
+$ echo "MyVaultPassword" | docker secret create password -
+$ docker service create --name=api --secret=password lucj/api
+$ docker service ps api
+$ docker exec -ti $(docker ps --filter name=api -q) sh
+/ cat /run/secrets/password
+MyVaultPassword
+$ docker service update --secret-rm="password" api
+$ docker exec -ti $(docker ps --filter name=api -q) sh
+/ cat /run/secrets/password
+cat: /run/secrets/password: No such file or directory
+```
+
+## Config
+
+- As a secret but not sensible
+- https://gitlab.com/lucj/docker-exercices/-/blob/master/11.Swarm/config-et-secret.md 
