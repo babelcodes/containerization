@@ -55,6 +55,7 @@ $ docker swarm init
 $ docker swarm join
 ```
 
+
 ## RAFT - Distributed Consensus
 
 - http://thesecretlivesofdata.com/raft/
@@ -87,6 +88,7 @@ $ docker swarm join
   - Including lifecycle beat
   - And change message
 - [RAFT go deeper](https://gitlab.com/lucj/docker-exercices/-/blob/master/11.Swarm/raft-logs.md)
+
 
 ## Node
 
@@ -128,6 +130,7 @@ Commands:
 
 Run 'docker node COMMAND --help' for more information on a command.
 ```
+
 
 ## Commands
 
@@ -215,6 +218,7 @@ pes...      node2        Ready      Active           Reachable
 
 - See [Docker Machine](./machine.md)
 
+
 ## Sample
 
 - https://gitlab.com/lucj/docker-exercices/-/blob/master/11.Swarm/swarm-creation-local.md
@@ -278,6 +282,7 @@ xym9kgs3yp9bnnd3zf3sc3hxs     node3               Ready               Active    
 @node2$ docker node demote node2                                                                                                               
 Manager node2 demoted in the swarm.
 ```
+
 
 ## Service
 
@@ -381,6 +386,7 @@ $ docker service rollback vote
 
 - https://gitlab.com/lucj/docker-exercices/-/blob/master/11.Swarm/service-update-rollback.md
 
+
 ## Secret
 
 - From v1.13
@@ -402,10 +408,12 @@ $ docker exec -ti $(docker ps --filter name=api -q) sh
 cat: /run/secrets/password: No such file or directory
 ```
 
+
 ## Config
 
 - As a secret but not sensible
 - https://gitlab.com/lucj/docker-exercices/-/blob/master/11.Swarm/config-et-secret.md 
+
 
 ## Stack
 
@@ -443,6 +451,7 @@ $ docker stack rm
 $ docker stack rm vote
 ```
 
+
 ## TICK
 
 - https://www.influxdata.com/time-series-platform/
@@ -459,6 +468,7 @@ $ docker stack rm vote
 > - Kapacitor
 
 ![](https://gitlab.com/lucj/docker-exercices/-/raw/master/11.Swarm/images/tick-1.png)
+
 
 ## Routing Mesh
 - Expose services from external, on all the nodes of the stack
