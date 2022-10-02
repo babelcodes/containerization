@@ -5,6 +5,7 @@
 > - orchestrate the services of this cluster
 
 ![](https://gitlab.com/lucj/docker-exercices/-/raw/master/11.Swarm/images/swarm1.png)
+- https://docs.docker.com/engine/swarm/
 
 - See [Docker](./README.md)
 - Since v1.12, more easy (June, 2016)
@@ -193,6 +194,9 @@ pes...      node2        Ready      Active           Reachable
 
 ## Sample
 
+- https://gitlab.com/lucj/docker-exercices/-/blob/master/11.Swarm/swarm-creation-local.md
+- https://gitlab.com/lucj/docker-exercices/-/blob/master/11.Swarm/swarm-creation-DigitalOcean.md
+
 Create virtual machines (future nodes):
 ````shell
 $ docker-machine create --driver virtualbox node1
@@ -251,3 +255,105 @@ xym9kgs3yp9bnnd3zf3sc3hxs     node3               Ready               Active    
 @node2$ docker node demote node2                                                                                                               
 Manager node2 demoted in the swarm.
 ````
+
+## Service
+
+- Since 1.12
+- Launch the containers
+- Mode `replicated` or `global`
+- Service discovery
+- Publish port / routing mesh (ex: can access to a webapp on each node even if no replicas)
+
+Configuration
+- Used image
+- Deployment mode
+- Exposed ports
+- Secrets
+- Boot strategy
+- Deployment constraints
+- Updates
+- Resources
+- Health check
+- https://docs.docker.com/engine/reference/commandline/service_create/
+
+Tasks
+- A `service`
+  - Launches N `tasks` (replicas) and for each:
+    - Is deployed on a `mode`
+    - Executes a `container`
+
+![](https://docs.docker.com/engine/swarm/images/services-diagram.png)
+- https://docs.docker.com/engine/swarm/how-swarm-mode-works/services/
+
+### Commands
+```shell
+$ docker service --help
+
+Commands:
+  create      Create a new service
+  inspect     Display detailed information on one or more services
+  logs        Fetch the logs of a service or task
+  ls          List services
+  ps          List the tasks of one or more services
+  rm          Remove one or more services
+  rollback    Revert changes to a service's configuration
+  scale       Scale one or multiple replicated services
+  update      Update a service
+```
+
+### Create
+Create a service:
+````shell
+$ docker service create --name www -p 8080:80 --replicas 3 nginx  # SHOULD BE LANCHED ON A MANAGER
+$ docker service ls
+$ docker service ps www # Exectued tasks
+$ docker service scale www=1
+$ docker service ps wwww
+$ curl get 192.168.99.100
+$ curl get 192.168.99.101
+$ curl get 192.168.99.102
+````
+
+Example of a database:
+````shell
+$ docker service create                       \
+    --mount type=volume,src=data,dst=/data/db \
+    --name db                                 \
+    --publish 27017:27017                     \
+    mongo:4.0
+$ docker service ls
+$ docker volume ls
+$ docker service rm
+````
+
+- https://gitlab.com/lucj/docker-exercices/-/blob/master/11.Swarm/service-creation.md
+
+### Rolling upgrade
+- By default update a replica and go to the next
+````shell
+$ docker service create    \
+    --update-parallelism 2 \      # Replicats updated 2 by 2
+    --update-delay 10s     \      # Wait 10s before update next replicas pool
+    --replicas 4           \
+    --publish 27017:27017  \
+    --name vote            \
+    instavote/vote
+
+$ docker service update --image instavote/vote:indent vote
+````
+
+### Service rollback
+````shell
+$ docker service create    \
+    --publish 27017:27017  \
+    --name vote            \
+    instavote/vote
+$ docker service inspect vote     # .Spec
+
+$ docker service update --image instavote/vote:indent vote
+$ docker service inspect vote     # .Spec and .PreviousSpec
+
+$ docker service rollback vote
+````
+
+- https://gitlab.com/lucj/docker-exercices/-/blob/master/11.Swarm/service-update-rollback.md
