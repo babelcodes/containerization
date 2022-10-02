@@ -4,8 +4,29 @@
 > - to manage a hosts cluster
 > - orchestrate the services of this cluster
 
+Table of content
+- [Introduction](#introduction)
+- [RAFT - Distributed Consensus](#raft---distributed-consensus)
+- [Node](#node)
+- [Commands](#commands)
+- [Sample](#sample)
+- [Service](#service)
+- [Secret](#secret)
+- [Config](#config)
+- [Stack](#stack)
+- [TICK](#tick)
+- [Routing Mesh](#routing-mesh)
+- [Backup & Restore](#backup--restore)
+- [Fault tolerance](#fault-tolerance)
+- [Monitoring](#monitoring)
+- [Quiz](#Quiz)
+
+
+## Introduction
+
 ![](https://gitlab.com/lucj/docker-exercices/-/raw/master/11.Swarm/images/swarm1.png)
-- https://docs.docker.com/engine/swarm/
+
+https://docs.docker.com/engine/swarm/
 
 - See [Docker](./README.md)
 - Since v1.12, more easy (June, 2016)
@@ -25,7 +46,7 @@ Primitives
 - Stack (services group)
 - Secret
 
-## Commands
+Commands
 
 ```shell
 $ docker swarm --help
@@ -360,7 +381,6 @@ $ docker service rollback vote
 
 - https://gitlab.com/lucj/docker-exercices/-/blob/master/11.Swarm/service-update-rollback.md
 
-
 ## Secret
 
 - From v1.13
@@ -386,7 +406,6 @@ cat: /run/secrets/password: No such file or directory
 
 - As a secret but not sensible
 - https://gitlab.com/lucj/docker-exercices/-/blob/master/11.Swarm/config-et-secret.md 
-
 
 ## Stack
 
@@ -440,7 +459,6 @@ $ docker stack rm vote
 > - Kapacitor
 
 ![](https://gitlab.com/lucj/docker-exercices/-/raw/master/11.Swarm/images/tick-1.png)
-
 
 ## Routing Mesh
 - Expose services from external, on all the nodes of the stack
