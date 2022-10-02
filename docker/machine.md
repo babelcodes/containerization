@@ -1,6 +1,6 @@
 # Docker Machine
 
-> Docker Machine est un utilitaire permettant d'instancier des hôtes Docker. 
+> Docker Machine est un utilitaire permettant d'instancier des hôtes Docker (créer une machine virtuelle et d'y installer docker). 
 > Il s'interface avec des hyperviseur locaux (Virtualbox, Hyper-V) et également avec de nombreux cloud providers 
 > (DigitalOcean, Amazon EC2, Google Compute Engine, Microsoft Azure, ...)
 
