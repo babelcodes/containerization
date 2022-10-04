@@ -103,20 +103,22 @@ flowchart LR
     RBAC --> Namespaces
     
     direction RL
-    Resources --> Workload
-    Workload --> Pod
-    Workload --> Deployment
-    Workload --> SeamonSet
-    Workload --> StatefulSet
-    Workload --> Job
-    Workload --> CronJob
-
-    Resources --> Configuration
-    Configuration --> ConfigMap
-    Configuration --> Secret
-
-    Resources --> ClusterExtension
-    ClusterExtension --> CustomResourcesDefinition
+    subgraph B1
+      Resources --> Workload
+      Workload --> Pod
+      Workload --> Deployment
+      Workload --> SeamonSet
+      Workload --> StatefulSet
+      Workload --> Job
+      Workload --> CronJob
+  
+      Resources --> Configuration
+      Configuration --> ConfigMap
+      Configuration --> Secret
+  
+      Resources --> ClusterExtension
+      ClusterExtension --> CustomResourcesDefinition
+    end
 ```
 
 ## Cluster
