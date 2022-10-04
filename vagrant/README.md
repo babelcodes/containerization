@@ -1,5 +1,7 @@
 # Vagrant
 
+> Vagrant is a tool for building and managing virtual machine environments in a single workflow.
+
 - https://www.vagrantup.com/
 
 ## Virtual Machine
@@ -28,10 +30,6 @@ vagrant plugin install vagrant-berkshelf   # Chef vs. Berkshelf: https://github.
 vagrant plugin install vagrant-omnibus     # https://github.com/chef-boneyard/vagrant-omnibus 
 vagrant plugin install vagrant-hostmanager # https://github.com/devopsgroup-io/vagrant-hostmanager 
 ```
-
-
-
-
 
 
 ## Configuration
