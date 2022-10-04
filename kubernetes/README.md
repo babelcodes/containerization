@@ -102,6 +102,7 @@ flowchart LR
     RBAC --> ClusterRoleBinding
     RBAC --> Namespaces
     
+    direction RL
     Resources --> Workload
     Workload --> Pod
     Workload --> Deployment
