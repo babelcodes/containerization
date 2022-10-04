@@ -83,14 +83,39 @@ Features
 ```
 
 ```mermaid
-flowchart TD
-    Resources[Start] --> Network
+flowchart LR
+    Resources --> Network
     Network --> Service
     Service --> ClusterIP
     Service --> NodePort
     Service --> LoadBalancer
     
     Resources --> Stockage
+    Stockage --> PersistentVolume
+    Stockage --> PersistentVolumeClain
+    Stockage --> StorageClass
+    
+    Resources --> RBAC
+    RBAC --> Role
+    RBAC --> ClusterRole
+    RBAC --> RoleBinding
+    RBAC --> ClusterRoleBinding
+    RBAC --> Namespaces
+    
+    Resources --> Workload
+    Workload --> Pod
+    Workload --> Deployment
+    Workload --> SeamonSet
+    Workload --> StatefulSet
+    Workload --> Job
+    Workload --> CronJob
+
+    Resources --> Configuration
+    Configuration --> ConfigMap
+    Configuration --> Secret
+
+    Resources --> ClusterExtension
+    ClusterExtension --> CustomResourcesDefinition
 ```
 
 ## Cluster
