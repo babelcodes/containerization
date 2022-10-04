@@ -84,23 +84,25 @@ Features
 
 ```mermaid
 flowchart LR
-    Resources --> Network
-    Network --> Service
-    Service --> ClusterIP
-    Service --> NodePort
-    Service --> LoadBalancer
-    
-    Resources --> Stockage
-    Stockage --> PersistentVolume
-    Stockage --> PersistentVolumeClain
-    Stockage --> StorageClass
-    
-    Resources --> RBAC
-    RBAC --> Role
-    RBAC --> ClusterRole
-    RBAC --> RoleBinding
-    RBAC --> ClusterRoleBinding
-    RBAC --> Namespaces
+    subgraph _
+      Resources --> Network
+      Network --> Service
+      Service --> ClusterIP
+      Service --> NodePort
+      Service --> LoadBalancer
+      
+      Resources --> Stockage
+      Stockage --> PersistentVolume
+      Stockage --> PersistentVolumeClain
+      Stockage --> StorageClass
+      
+      Resources --> RBAC
+      RBAC --> Role
+      RBAC --> ClusterRole
+      RBAC --> RoleBinding
+      RBAC --> ClusterRoleBinding
+      RBAC --> Namespaces
+    end
     
     direction RL
     subgraph B1
