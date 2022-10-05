@@ -64,6 +64,7 @@ Features
 - Long-running processes or batchs
 - RBAC (Role-Based Access Control)
 
+Infrastructure:
 ```
      ┌───────────────────────────────────────────────┐
      │ Cluster                                       │
@@ -83,20 +84,39 @@ Features
      └───────────────────────────────────────────────┘
 ```
 
+
+Application:
+```
+       ┌────────────────────────────────────┐ 
+       │ Application                        │ 
+       │                                    │ 
+       │ ┌─────────────────────────┐        │ 
+       │ │ Pod (Spec)              │        │
+       │ │ = Business Service (MS) │        │ 
+       │ │ ┌──────────────┐        │        │ 
+       │ │ │ Replicas     │        │        │ 
+       │ │ │              │        │        │ 
+       │ │ └──────────────┘        │        │ 
+       │ └─────────────────────────┘        │ 
+       └────────────────────────────────────┘ 
+```
+
+
 ## Cluster
 - Set of nodes
 - `master` or `worker`
 
+
 ## Pod
-- Smallest applicative unit running on a cluster
-- Group of containers sharing network and storage
-- Count of replicas = count of instances of this pod on the cluster
-- Can deploy a microservice on N pods
+
+- [Pod](pod.md)
+
 
 ## Deployment
 - Can be a service
 - N identical pods
 - Count of replicas
+
 
 ## Service
 - Expose the applications from inside Pods to the interior or exterior of a cluster
@@ -250,7 +270,13 @@ $ kubectl get nodes
 
 ### Installation
 - https://gitlab.com/lucj/k8s-exercices/-/blob/master/Installation/kubectl.md `#INSTALL`
-
+```shell
+$ VERSION=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+$ curl -LO https://storage.googleapis.com/kubernetes-release/release/$VERSION/bin/linux/amd64/kubectl
+$ chmod +x ./kubectl
+$ sudo mv ./kubectl /usr/local/bin/kubectl
+```
+- [Multipass](#multipass)
 
 ### Multipass
 - [Multipass](../multipass)
@@ -268,7 +294,8 @@ $ sudo mv minikube /usr/local/bin/
 
 $ minikube start
 $ kubectl get node
-
+NAME       STATUS   ROLES           AGE   VERSION
+minikube   Ready    control-plane   13s   v1.25.0
 $ minikube start --driver docker --nodes 3
 $ kubectl get no
 
