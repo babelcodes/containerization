@@ -4,6 +4,14 @@
 > while using the same shared operating system (OS). One of the benefits of containerization is that a container 
 > is essentially a fully packaged and portable computing environment.
 
+## Definitions
+
+Cloud Native
+1. Microservices oriented
+1. Packaged as containers
+1. Dynamically orchestrated
+- CNCF.io | Cloud Native Computing Foundation (K8S, Prometheus, Fluentd...)
+
 ## Containers
 - [Docker](./docker)
 

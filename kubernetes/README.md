@@ -14,7 +14,9 @@
 1. [Concepts](#concepts)
 1. [Cluster](#cluster)
 1. [Managed](#managed)
-1. [Pod](#pod)
+1. [Objects](#objects)
+   - [Pod](./pod.md)
+   - [Service](service/service.md)
 1. [Deployment](#deployment)
 1. [Service](#service)
 1. [Resources](#resources)
@@ -127,9 +129,10 @@ Application:
 - [Managed clusters in production](./managed.md)
 
 
-## Pod
+## Objects
 
-- [Pod](pod.md)
+- [Pod](./pod.md)
+- [Service](service/service.md)
 
 
 ## Deployment
@@ -242,7 +245,7 @@ spec:
 
 ## Manage the cluster
 - Send request to the API server
-- Use the `kubectl` binary or web interface
+- Use the `kubectl` (use to talk with a cluster) binary or web interface
 - Master nodes exposes API to manage the cluster (call by `kubectl`)
 - Configuration set in one of the `.kube/config`
 
@@ -261,7 +264,7 @@ spec:
 
 ### API Server
 - https://kubernetes.io/docs/reference/kubernetes-api/
-- Via `kubectl` or web interface
+- Via `kubectl` (use to talk with a cluster) or web interface
 - Each request go through a pipeline: authentication, authorization, admission controller
 - To create a node:
   1. => API Server
@@ -280,7 +283,10 @@ spec:
   - `$KUBECONFIG`
   - `--kubeconfig`
 - https://github.com/ahmetb/kubectx
-
+```shell
+$ kubectl config view
+$ kubectl config get-contexts
+```
 
 ## Workshop
 - Kubernetes is a cluster with some nodes... Get the list:
