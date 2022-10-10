@@ -16,6 +16,10 @@
 
 ## Provisioning
 - [Multipass](./multipass)
+  - `$ multipass launch -n master`
+  - `$ multipass shell master`
+  - `$ multipass exec master ...`
+  - `$ multipass launch -n worker1`
 
 ## Hypervisors
 - [VirtualBox](./virtualbox)
