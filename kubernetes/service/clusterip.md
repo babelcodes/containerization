@@ -18,7 +18,7 @@ spec:
     - port: 80            # Arrive at port 80 of the service
       targetPort: 80      # Forwarded on the port 80 of a Pod
 ```
-- `service.yaml`
+- `ClusterIp/service.yaml`
 
 ```yaml
 apiVersion: v1
@@ -34,7 +34,7 @@ spec:
       ports:
         - containerPort: 80
 ```
-- `pod.yaml`
+- `ClusterIp/pod.yaml`
 
 ### Command
 ```shell
