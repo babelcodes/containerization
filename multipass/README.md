@@ -4,6 +4,7 @@
 
 - https://multipass.run/ `#INSTALL`
 - https://gitlab.com/lucj/k8s-exercices/-/blob/master/Installation/multipass.md
+- https://gitlab.com/lucj/k8s-exercices/-/blob/master/Installation/kubeadm.md
 
 ## Architecture
 ```

@@ -15,7 +15,6 @@
 - [Vagrant](./vagrant)
 
 ## Provisioning
-
 - [Multipass](./multipass)
 
 ## Hypervisors

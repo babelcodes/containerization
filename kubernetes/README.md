@@ -9,6 +9,21 @@
 - https://youtu.be/10DBlZJntHc?t=752
 - https://www.udemy.com/course/la_plateforme_k8s/learn/lecture/9922946?start=0#overview
 
+## Table of content
+
+1. [Concepts](#concepts)
+1. [Cluster](#cluster)
+1. [Managed](#managed)
+1. [Pod](#pod)
+1. [Deployment](#deployment)
+1. [Service](#service)
+1. [Resources](#resources)
+1. [Manage the cluster](#manage-the-cluster)
+1. [Components](#components)
+1. [Workshop](#workshop)
+1. [Distributions](#distributions)
+
+
 ## Concepts
 
 Containers
@@ -105,6 +120,11 @@ Application:
 ## Cluster
 - Set of nodes
 - `master` or `worker`
+
+
+## Managed
+
+- [Managed clusters in production](./managed.md)
 
 
 ## Pod
@@ -219,6 +239,7 @@ spec:
 - Labels: to select
 - Annotations: used by external services
 
+
 ## Manage the cluster
 - Send request to the API server
 - Use the `kubectl` binary or web interface
@@ -260,11 +281,13 @@ spec:
   - `--kubeconfig`
 - https://github.com/ahmetb/kubectx
 
+
 ## Workshop
 - Kubernetes is a cluster with some nodes... Get the list:
 ```shell
 $ kubectl get nodes
 ```
+
 
 ## Distributions
 
@@ -283,7 +306,7 @@ $ sudo mv ./kubectl /usr/local/bin/kubectl
 
 
 ### Minikube
-- All the Kubernetes components in a single local virtual machine or in Docker
+- All the Kubernetes components on a **SINGLE LOCAL** virtual machine or in Docker: DO NOT USE IN PRODUCTION.
 - Need a hypervisor as HyperKit or VirtualBox
 - https://github.com/kubernetes/minikube  `#INSTALL`
 - https://gitlab.com/lucj/k8s-exercices/-/blob/master/Installation/minikube.md
