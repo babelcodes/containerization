@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vote-lb
+spec:
+  selector:
+    app: vote             # Select all Pods having label 'app' with value 'vote'
+  type: LoadBalancer      #
+  ports:
+    - port: 80            # Arrive at port 80 of the service
+      targetPort: 80      # Forwarded on the port 80 of a Pod

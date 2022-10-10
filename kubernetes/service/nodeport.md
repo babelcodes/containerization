@@ -20,7 +20,7 @@ spec:
       targetPort: 80      # Forwarded on the port 80 of a Pod
       nodePort: 31000     # EXPOSED PORT                                              <== (2/2)
 ```
-- `NodePort/service.yaml`
+- `config/service/NodePort/service.yaml`
 
 ```yaml
 apiVersion: v1
@@ -36,13 +36,13 @@ spec:
       ports:
         - containerPort: 80
 ```
-- `ClusterIp/pod.yaml`
+- `config/service/ClusterIp/pod.yaml`
 
 ### Command
 ```shell
 $ minikube start
-$ kubectl apply -f ../config/ClusterIp/pod.yaml
-$ kubectl apply -f ../config/NodePort/service.yaml
+$ kubectl apply -f ../config/service/ClusterIp/pod.yaml
+$ kubectl apply -f ../config/service/NodePort/service.yaml
 
 $ kubectl get pod,service
 $ kubectl get svc/vote -o yaml

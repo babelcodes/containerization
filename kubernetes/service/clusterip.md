@@ -18,7 +18,7 @@ spec:
     - port: 80            # Arrive at port 80 of the service
       targetPort: 80      # Forwarded on the port 80 of a Pod
 ```
-- `ClusterIp/service.yaml`
+- `config/service/ClusterIp/service.yaml`
 
 ```yaml
 apiVersion: v1
@@ -34,13 +34,13 @@ spec:
       ports:
         - containerPort: 80
 ```
-- `ClusterIp/pod.yaml`
+- `config/service/ClusterIp/pod.yaml`
 
 ### Command
 ```shell
 $ minikube start
-$ kubectl apply -f ../config/ClusterIp/pod.yaml
-$ kubectl apply -f ../config/ClusterIp/service.yaml
+$ kubectl apply -f ../config/service/ClusterIp/pod.yaml
+$ kubectl apply -f ../config/service/ClusterIp/service.yaml
 
 $ kubectl get pod,service
 NAME       READY   STATUS    RESTARTS      AGE
