@@ -1,5 +1,6 @@
 # Kubernetes Service
 
+- Part of [Kubernetes](../README.md)
 - Expose a Pod of an application through the network
 - `kube-proxy` responsible for load-balancing
 - Several types:

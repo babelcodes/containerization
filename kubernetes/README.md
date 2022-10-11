@@ -6,6 +6,7 @@
 > software management, deployment, and scaling of containerized services and 
 > workloads.
 
+- Part of [Containerization](../README.md)
 - https://youtu.be/10DBlZJntHc?t=752
 - https://www.udemy.com/course/la_plateforme_k8s/learn/lecture/9922946?start=0#overview
 
@@ -17,6 +18,7 @@
 1. [Objects](#objects)
    - [Pod](./pod.md)
    - [Service](service/service.md)
+   - [Deployment](./deployment.md)
 1. [Deployment](#deployment)
 1. [Service](#service)
 1. [Resources](#resources)

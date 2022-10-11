@@ -1,6 +1,6 @@
 # Kubernetes Service / NodePort
 
-- Child of [Service](..)
+- Part of [Service](./README.md)
 - To expose a Pod outside a cluster
 - By assigning a (same) given port to each node of a cluster  
 - https://gitlab.com/lucj/k8s-exercices/-/blob/master/Services/service_NodePort.md

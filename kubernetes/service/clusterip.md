@@ -1,6 +1,6 @@
 # Kubernetes Service / ClusterIP
 
-- Child of [Service](..)
+- Part of [Service](./README.md)
 - To expose a Pod only **INSIDE** a cluster
 - https://gitlab.com/lucj/k8s-exercices/-/blob/master/Services/service_ClusterIP.md
 

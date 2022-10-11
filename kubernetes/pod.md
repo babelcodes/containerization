@@ -1,5 +1,7 @@
 # Kubernetes Pod
 
+- Part of [Kubernetes](./README.md)
+
 Infrastructure:
 ```
      ┌───────────────────────────────────────────────┐

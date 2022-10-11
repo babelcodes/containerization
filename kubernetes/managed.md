@@ -1,5 +1,6 @@
 # Managed clusters in production
 
+- Part of [Kubernetes](./README.md)
 - https://kubernetes.io/fr/docs/setup/
 - https://www.udemy.com/course/la_plateforme_k8s/learn/lecture/14793064?start=15#overview
 
