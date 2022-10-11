@@ -19,6 +19,7 @@
    - [Pod](./pod.md)
    - [Service](service/service.md)
    - [Deployment](./deployment.md)
+   - [Namespace](./namespace.md)
 1. [Deployment](#deployment)
 1. [Service](#service)
 1. [Resources](#resources)

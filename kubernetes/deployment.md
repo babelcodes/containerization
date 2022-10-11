@@ -21,6 +21,11 @@ Abstraction layers:
   - Replica Set
     - Pod
 
+2 ways for creating a Deployment:d
+```shell
+$ kubectl apply -f deploy.yaml
+$ kubectl create deploy vote --image instavote/vote
+```
 ## With configuration
 
 ```yaml
