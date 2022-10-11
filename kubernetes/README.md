@@ -27,7 +27,14 @@
 1. [Manage the cluster](#manage-the-cluster)
 1. [Components](#components)
 1. [Workshop](#workshop)
-1. [Distributions](#distributions)
+1. [Tools](#tools)
+   - [kubectl](#kubectl)
+   - [Multipass](#multipass)
+   - [Minikube](#minikube)
+   - [Kind](#kind)
+   - [MicroK8S](#microk8s)
+   - [K3S](#k3s)
+   - [K3D](#k3d)
 
 
 ## Concepts
@@ -297,21 +304,19 @@ $ kubectl get nodes
 ```
 
 
-## Distributions
+## Tools
 
 ### kubectl
 - [kubectl](tools/kubectl.md)
 
-
 ### Multipass
 - [Multipass](../multipass)
-
 
 ### Minikube
 - [Minikube](tools/minikube.md)
 
-
-### Kind (Kubernetes in Docker) `#INSTALL`
+### Kind
+- (Kubernetes in Docker) `#INSTALL`
 - Each node of the cluster run in a Docker container (easy to install)
 - https://github.com/kubernetes-sigs/kind
 - https://kind.sigs.k8s.io/docs/user/quick-start/
