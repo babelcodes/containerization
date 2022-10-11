@@ -1,5 +1,18 @@
 # Docker
 
+Table of content
+1. [Theory](#theory)
+1. [Images](#images)
+1. [Registry](#registry)
+1. [Storage / Volumes](#storage--volumes)
+1. [Machine](#machine)
+1. [Compose](#compose)
+1. [Swarm](#swarm)
+1. [Ecosystem](#ecosystem)
+   1. [Voting App](#voting-app)
+   1. [play-with-docker.com](#play-with-dockercom)
+   1. [Vagrant](#vagrant)
+
 ## Theory
 
 ### Presentation
@@ -84,6 +97,23 @@ CMD ["npm", "start]
    - https://gitlab.com/lucj/docker-exercices/-/blob/master/06.Images/cache.md 
 - Build Context
 	- `.dockerignore` (.git, node_module...)
+
+### REPL
+
+Launch a docker image as a CLI:
+
+```shell
+docker container run -ti python:3
+docker container run -ti ruby:2.5.1
+docker container run -ti node:8.12-alpine  # alpine linux, small and securized
+```
+
+Run an image:
+
+```shell
+docker container run -p 27017:27017 mongo:4.0
+docker container run -p 80:3000 redmine:3
+```
 
 ## Registry
 
@@ -221,26 +251,10 @@ $ ss USWE@HOST ls /tmp/data
 
 - [Swarm](./swarm.md)
 
-## Images
-
-### REPL
-
-Launch a docker image as a CLI:
-
-```shell
-docker container run -ti python:3
-docker container run -ti ruby:2.5.1
-docker container run -ti node:8.12-alpine  # alpine linux, small and securized
-```
-
-Run an image:
-
-```shell
-docker container run -p 27017:27017 mongo:4.0
-docker container run -p 80:3000 redmine:3
-```
-
 ## Ecosystem
+
+### Voting App
+- [Voting App](./voting-app.md))
 
 ### play-with-docker.com
 
@@ -253,7 +267,8 @@ docker version
 docker container run -p 80:3000 redmine:3
 ```
 
-
 ### Vagrant
 
 See `../vagrant`
+
+

@@ -102,6 +102,7 @@ $ kubectl get deploy --namespace default
 No resources found in default namespace.
 
 ## CLEANUP
+$ kubectl get deploy,pod,svc --all-namespaces
 $ kubectl delete namespace/development
 $ minikube delete
 ```

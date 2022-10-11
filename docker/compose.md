@@ -3,6 +3,12 @@
 - Gérer des applications complexes, ex: microservices
 - Format de fichier `docker-compose.yml` et un binaire
 
+Table of content
+- [docker-compose.yml](#docker-composeyml)
+- [The binary](#the-binary)
+- [Service Discovery / DNS](#service-discovery--dns)
+- [Voting App](#voting-app)
+
 ## docker-compose.yml
 - https://docs.docker.com/compose/compose-file/
 - Options:
@@ -58,7 +64,7 @@ services:
 			- backend
 ```
 
-## Le binaire
+## The binary
 
 - Indépendant du deamon
 - Installation indépendante (mais incluse dans Docker Desktop)
@@ -87,8 +93,6 @@ Code (NodeJS):
 const url = 'mongodb://MYDB/todos';
 ```
 
-## VotingApp
+## Voting App
 
-- https://github.com/dockersamples/example-voting-app
-- Exemple utilisé pour démos / présentations
-- 5 services, différents langages et BD
+- [Voting App](./voting-app.md)

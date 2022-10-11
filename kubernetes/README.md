@@ -20,6 +20,7 @@
    - [Service](service/service.md)
    - [Deployment](./deployment.md)
    - [Namespace](./namespace.md)
+1. [Voting App](./voting-app.md)
 1. [Deployment](#deployment)
 1. [Service](#service)
 1. [Resources](#resources)
@@ -315,24 +316,8 @@ $ sudo mv ./kubectl /usr/local/bin/kubectl
 
 
 ### Minikube
-- All the Kubernetes components on a **SINGLE LOCAL** virtual machine or in Docker: DO NOT USE IN PRODUCTION.
-- Need a hypervisor as HyperKit or VirtualBox
-- https://github.com/kubernetes/minikube  `#INSTALL`
-- https://gitlab.com/lucj/k8s-exercices/-/blob/master/Installation/minikube.md
-```shell
-$ curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-amd64
-$ chmod +x minikube
-$ sudo mv minikube /usr/local/bin/
+- [Minikube](./minikube.md)
 
-$ minikube start
-$ kubectl get node
-NAME       STATUS   ROLES           AGE   VERSION
-minikube   Ready    control-plane   13s   v1.25.0
-$ minikube start --driver docker --nodes 3
-$ kubectl get no
-
-$ minikube delete
-```
 
 ### Kind (Kubernetes in Docker) `#INSTALL`
 - Each node of the cluster run in a Docker container (easy to install)
