@@ -129,12 +129,10 @@ Application:
 
 
 ## Managed
-
 - [Managed clusters in production](./managed.md)
 
 
 ## Objects
-
 - [Pod](./pod.md)
 - [Service](service/service.md)
 
@@ -249,7 +247,7 @@ spec:
 
 ## Manage the cluster
 - Send request to the API server
-- Use the `kubectl` (use to talk with a cluster) binary or web interface
+- Use the [kubectl](tools/kubectl.md) (use to talk with a cluster) binary or web interface
 - Master nodes exposes API to manage the cluster (call by `kubectl`)
 - Configuration set in one of the `.kube/config`
 
@@ -268,7 +266,7 @@ spec:
 
 ### API Server
 - https://kubernetes.io/docs/reference/kubernetes-api/
-- Via `kubectl` (use to talk with a cluster) or web interface
+- Via [kubectl](tools/kubectl.md) (use to talk with a cluster) or web interface
 - Each request go through a pipeline: authentication, authorization, admission controller
 - To create a node:
   1. => API Server
@@ -301,22 +299,16 @@ $ kubectl get nodes
 
 ## Distributions
 
-### Installation
-- https://gitlab.com/lucj/k8s-exercices/-/blob/master/Installation/kubectl.md `#INSTALL`
-```shell
-$ VERSION=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
-$ curl -LO https://storage.googleapis.com/kubernetes-release/release/$VERSION/bin/linux/amd64/kubectl
-$ chmod +x ./kubectl
-$ sudo mv ./kubectl /usr/local/bin/kubectl
-```
-- [Multipass](#multipass)
+### kubectl
+- [kubectl](tools/kubectl.md)
+
 
 ### Multipass
 - [Multipass](../multipass)
 
 
 ### Minikube
-- [Minikube](./minikube.md)
+- [Minikube](tools/minikube.md)
 
 
 ### Kind (Kubernetes in Docker) `#INSTALL`

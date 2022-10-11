@@ -1,5 +1,6 @@
 # Minikube
 
+- Part of [Kubernetes](../README.md)
 - All the Kubernetes components on a **SINGLE LOCAL** virtual machine or in Docker: DO NOT USE IN PRODUCTION.
 - Need a hypervisor as HyperKit or VirtualBox
 - https://github.com/kubernetes/minikube  `#INSTALL`

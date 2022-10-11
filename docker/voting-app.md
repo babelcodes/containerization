@@ -20,7 +20,7 @@
    - A Deployment file for each of the 5 microservices
    - A Service file for each of the 5 microservices
      - Except for the worker as it takes from Redis to push into Postgre without needing to be called / exposed
-- Use [Minikube](../kubernetes/minikube.md)
+- Use [Minikube](../kubernetes/tools/minikube.md)
 
 ```shell
 $ minikube start

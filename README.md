@@ -20,7 +20,8 @@ Cloud Native
 - [Docker Swarm](./docker/swarm.md)
 - [Kubernetes](./kubernetes)
   - Tools:
-    - [Minikube](./kubernetes/minikube.md)
+    - [kubectl](kubernetes/tools/kubectl.md)
+    - [Minikube](kubernetes/tools/minikube.md)
 
 ## Virtual Machines
 - [Vagrant](./vagrant)
