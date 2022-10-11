@@ -14,10 +14,13 @@ Cloud Native
 
 ## Containers
 - [Docker](./docker)
+  - [Voting App](./docker/voting-app.md) sample
 
 ## Orchestrators
 - [Docker Swarm](./docker/swarm.md)
 - [Kubernetes](./kubernetes)
+  - Tools:
+    - [Minikube](./kubernetes/minikube.md)
 
 ## Virtual Machines
 - [Vagrant](./vagrant)
